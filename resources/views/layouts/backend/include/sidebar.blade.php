@@ -54,9 +54,11 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            
-            <router-link to="/tag">Tag</router-link>
+          <li class="nav-item">            
+            <router-link to="/tag" class="nav-link">
+              <i class="fas fa-tags"></i>
+              <p>Tag</p>
+            </router-link>
           </li>
           
         </ul>
