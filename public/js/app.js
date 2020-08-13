@@ -2149,25 +2149,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -37978,9 +37959,7 @@ var staticRenderFns = [
       _c("section", { staticClass: "content-header" }, [
         _c("div", { staticClass: "container-fluid" }, [
           _c("div", { staticClass: "row mb-2" }, [
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c("h1", [_vm._v("Form Validation")])
-            ]),
+            _c("div", { staticClass: "col-sm-6" }, [_c("h1", [_vm._v("Tag")])]),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-6" }, [
               _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
@@ -38003,9 +37982,7 @@ var staticRenderFns = [
             _c("div", { staticClass: "col-md-12" }, [
               _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-header" }, [
-                  _c("h3", { staticClass: "card-title" }, [
-                    _vm._v("Bordered Table")
-                  ]),
+                  _c("h3", { staticClass: "card-title" }, [_vm._v("All Tags")]),
                   _vm._v(" "),
                   _c("div", { staticClass: "card-tools" }, [
                     _c(
@@ -38040,123 +38017,73 @@ var staticRenderFns = [
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
-                  _c("table", { staticClass: "table table-bordered" }, [
-                    _c("thead", [
-                      _c("tr", [
-                        _c("th", { staticStyle: { width: "10px" } }, [
-                          _vm._v("#")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("Task")]),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("Progress")]),
-                        _vm._v(" "),
-                        _c("th", { staticStyle: { width: "40px" } }, [
-                          _vm._v("Label")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("1.")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Update software")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("div", { staticClass: "progress progress-xs" }, [
-                            _c("div", {
-                              staticClass: "progress-bar progress-bar-danger",
-                              staticStyle: { width: "55%" }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("span", { staticClass: "badge bg-danger" }, [
-                            _vm._v("55%")
+                  _c(
+                    "table",
+                    { staticClass: "table table-bordered table-hover " },
+                    [
+                      _c("thead", [
+                        _c("tr", [
+                          _c("th", { staticStyle: { width: "10px" } }, [
+                            _vm._v("#")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Tag Name")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Slug")]),
+                          _vm._v(" "),
+                          _c("th", { staticStyle: { width: "40px" } }, [
+                            _vm._v("Action")
                           ])
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("2.")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Clean database")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("div", { staticClass: "progress progress-xs" }, [
-                            _c("div", {
-                              staticClass: "progress-bar bg-warning",
-                              staticStyle: { width: "70%" }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("span", { staticClass: "badge bg-warning" }, [
-                            _vm._v("70%")
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("3.")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Cron job running")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "progress progress-xs progress-striped active"
-                            },
-                            [
+                      _c("tbody", [
+                        _c("tr", [
+                          _c("td", [_vm._v("1.")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("Update software")]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("div", { staticClass: "progress progress-xs" }, [
                               _c("div", {
-                                staticClass: "progress-bar bg-primary",
-                                staticStyle: { width: "30%" }
+                                staticClass: "progress-bar progress-bar-danger",
+                                staticStyle: { width: "55%" }
                               })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("span", { staticClass: "badge bg-primary" }, [
-                            _vm._v("30%")
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("4.")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Fix and squish bugs")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "progress progress-xs progress-striped active"
-                            },
-                            [
-                              _c("div", {
-                                staticClass: "progress-bar bg-success",
-                                staticStyle: { width: "90%" }
-                              })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("span", { staticClass: "badge bg-success" }, [
-                            _vm._v("90%")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-info btn-sm",
+                                attrs: { type: "button" }
+                              },
+                              [_c("i", { staticClass: "fas fa-eye" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary btn-sm",
+                                attrs: { type: "button" }
+                              },
+                              [_c("i", { staticClass: "fas fa-edit" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger btn-sm",
+                                attrs: { type: "button" }
+                              },
+                              [_c("i", { staticClass: "fas fa-trash" })]
+                            )
                           ])
                         ])
                       ])
-                    ])
-                  ])
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-footer clearfix" }, [
@@ -53817,8 +53744,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xampp\htdocs\laravel\vue\shagor-personal-blog\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\laravel\vue\shagor-personal-blog\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! K:\PHP7.4\htdocs\laravel\shagor-personal-blog\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! K:\PHP7.4\htdocs\laravel\shagor-personal-blog\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
