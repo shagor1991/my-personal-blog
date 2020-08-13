@@ -2,19 +2,19 @@
     <div>
         <!-- Content Header (Page header) -->
         <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Tag</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Validation</li>
-                </ol>
-            </div>
-            </div>
-        </div><!-- /.container-fluid -->
+            <div class="container-fluid">
+                <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Form Validation</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Validation</li>
+                    </ol>
+                </div>
+                </div>
+            </div><!-- /.container-fluid -->
         </section>
 
         <!-- Main content -->
@@ -26,13 +26,10 @@
                         <div class="card-header">
                             <h3 class="card-title">All Tags</h3>
                             <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                <div class="input-group-append">
-                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
+                                <button type="button" class="btn btn-info" @click="create">
+                                    Add New
+                                    <i class="fas fa-plus"></i>
+                                </button>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -40,34 +37,34 @@
                             <table class="table table-bordered table-hover ">
                             <thead>                  
                                 <tr>
-                                    <th style="width: 10px">#</th>
-                                    <th>Tag Name</th>
-                                    <th>Slug</th>
-                                    <th style="width: 40px">Action</th>
+                                <th>#</th>
+                                <th>Tag Name</th>
+                                <th>Slug</th>
+                                <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Update software</td>
+                                <tr v-for="(customer, index) in customers" :key="customer.id">
+                                    <td>{{index+1}}</td>
+                                    <td>{{customer.name}}</td>
                                     <td>
-                                        <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                        </div>
+                                        {{customer.slug}}
                                     </td>
                                     <td>
-                                            <button type="button" class="btn btn-info btn-sm">
-                                                <i class="fas fa-eye"></i>
-                                            </button> 
-                                            <button type="button"  class="btn btn-primary btn-sm">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button type="button"  class="btn btn-danger btn-sm">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+
+                                        <button class="btn btn-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
                                     </td>
                                 </tr>
-                                
+                                                              
                             </tbody>
                             </table>
                         </div>
@@ -92,13 +89,76 @@
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="TagModalLong" tabindex="-1" role="dialog" aria-labelledby="TagModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="TagModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <form role="form" @submit.prevent="store()">
+                    <div class="modal-body">                
+                        <div class="card-body">
+                        <div class="form-group">
+                            <label for="tag_name">Tag Name</label>
+                            <input type="text" v-model="form.name" class="form-control" id="tag_name" placeholder="Tag Name">
+                        </div>                       
+                        </div>
+                        <!-- /.card-body -->                
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
 <script>
     export default {
+        data(){
+            return {
+                customers: [],
+                form: new Form({
+                    name: ''
+                })
+            }
+        },
         mounted() {
-            console.log('Component mounted.')
+            this.getData()
+        },
+        methods:{
+            getData(){
+                axios.get('/api/tag')
+                .then((response)=>{
+                    this.customers= response.data.tags.data
+                })
+                .catch((error)=>{
+                    console.log(error)
+                })
+            },
+            create(){
+                $('#TagModalLong').modal('show')
+            },
+            store(){
+                this.form.post('/api/tag')
+                .then(response=>{
+                    this.getData()
+                    $('#TagModalLong').modal('hide')
+                })
+                .catch(error=>{
+                    console.log(error)
+                })
+            }
         }
     }
 </script>
