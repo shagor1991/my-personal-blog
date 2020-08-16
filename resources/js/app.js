@@ -6,7 +6,16 @@ import VueRouter from 'vue-router'
 import {routes} from './routes'
 import { Form, HasError, AlertError } from 'vform'
 import VueProgressBar from 'vue-progressbar'
+
 import Snotify, { SnotifyPosition } from 'vue-snotify'
+
+const snotifyOptions = {
+  toast: {
+    position: SnotifyPosition.rightTop
+  }
+}
+
+Vue.use(Snotify, snotifyOptions)
 
 window.Form= Form
 Vue.use(VueRouter)
@@ -15,8 +24,8 @@ const router = new VueRouter({
 })
 
 const VueProgressBarOptions = {
-    color: '#bffaf3',
-    failedColor: '#874b4b',
+    color: 'green',
+    failedColor: 'red',
     thickness: '5px',
     transition: {
       speed: '0.2s',
@@ -24,23 +33,19 @@ const VueProgressBarOptions = {
       termination: 300
     },
     autoRevert: true,
-    location: 'left',
+    location: 'top',
     inverse: false
 }
   
 Vue.use(VueProgressBar, VueProgressBarOptions)
 
-const SnotifyOptions = {
-    toast: {
-      position: SnotifyPosition.rightTop
-    }
-  }
-  
-Vue.use(Snotify, SnotifyOptions)
+
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('admin-home', require('./components/AdminHome.vue').default);
 Vue.component('login-component', require('./components/LoginComponent.vue').default);
+Vue.component('pagination', require('./components/PaginationComponent.vue').default);
+
 
 
 Vue.component(HasError.name, HasError)
