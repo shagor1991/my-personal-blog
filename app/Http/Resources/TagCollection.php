@@ -14,6 +14,16 @@ class TagCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'data' => $this->collection->transform(function ($tag){
+                return [
+                    'id'            => $tag->id,
+                    'name'          => $tag->name,
+                    'slug'          => $tag->slug,
+                    'created_at'    => $tag->created_at,
+                    'updated_at'    => $tag->updated_at
+                ];
+            })
+        ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TagCollection;
+use App\Http\Resources\TagResource;
 use App\Tag;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,6 @@ class TagController extends Controller
      */
     public function index()
     {
-
         $tags = new TagCollection(Tag::paginate(10));
         return $tags;
     }
@@ -37,9 +37,7 @@ class TagController extends Controller
         $tag->name= $request->name;
         $tag->save();
 
-        return response()->json([
-            'tag'   => $tag
-        ],200);
+        return new TagResource($tag);
     }
 
     /**
@@ -50,10 +48,7 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        $tag= Tag::find($id);
-        return response()->json([
-            'tag'   => $tag
-        ],200);
+        return new TagResource(Tag::find($id));
     }
 
     /**
@@ -73,9 +68,7 @@ class TagController extends Controller
         $tag->name= $request->name;
         $tag->save();
 
-        return response()->json([
-            'tag'   => $tag
-        ],200);
+        return new TagResource($tag);
     }
 
     /**
@@ -89,8 +82,6 @@ class TagController extends Controller
         $tag= Tag::find($id);
         $tag->delete();
 
-        return response()->json([
-            'tag'  => $tag
-        ],200);
+        return new TagResource($tag);
     }
 }

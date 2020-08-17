@@ -62,7 +62,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="(tag, index) in tags" :key="tag.id">
-                                        <td>{{index+1}}</td>
+                                        <td>{{pagination.from +index}}</td>
                                         <td>{{tag.name}}</td>
                                         <td>
                                             {{tag.slug}}
@@ -160,7 +160,8 @@
                 queryField:'name',
                 query: '',
                 pagination: {
-                    current_page: 1
+                    current_page: 1,
+                    from: 1
                 },
                 form: new Form({
                     name: ''
@@ -176,7 +177,7 @@
                 axios.get('/api/tag?page='+ this.pagination.current_page)
                 .then((response)=>{
                     console.log(response)
-                    this.tags= response.data.tags.data
+                    this.tags= response.data.data
                     this.pagination = response.data.meta;
                     this.$Progress.finish()
                 })

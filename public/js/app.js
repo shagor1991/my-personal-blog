@@ -2290,7 +2290,8 @@ __webpack_require__.r(__webpack_exports__);
       queryField: 'name',
       query: '',
       pagination: {
-        current_page: 1
+        current_page: 1,
+        from: 1
       },
       form: new Form({
         name: ''
@@ -2307,7 +2308,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$Progress.start();
       axios.get('/api/tag?page=' + this.pagination.current_page).then(function (response) {
         console.log(response);
-        _this.tags = response.data.tags.data;
+        _this.tags = response.data.data;
         _this.pagination = response.data.meta;
 
         _this.$Progress.finish();
@@ -40086,7 +40087,9 @@ var render = function() {
                             "tbody",
                             _vm._l(_vm.tags, function(tag, index) {
                               return _c("tr", { key: tag.id }, [
-                                _c("td", [_vm._v(_vm._s(index + 1))]),
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.pagination.from + index))
+                                ]),
                                 _vm._v(" "),
                                 _c("td", [_vm._v(_vm._s(tag.name))]),
                                 _vm._v(" "),
@@ -57533,8 +57536,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! K:\PHP7.4\htdocs\laravel\shagor-personal-blog\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! K:\PHP7.4\htdocs\laravel\shagor-personal-blog\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\xampp\htdocs\laravel\vue\shagor-personal-blog\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\laravel\vue\shagor-personal-blog\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
