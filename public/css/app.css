@@ -47600,3 +47600,8 @@ a.text-dark:focus {
   transform-origin: 50% 50%;
 }
 
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+

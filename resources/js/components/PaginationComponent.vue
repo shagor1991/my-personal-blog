@@ -65,3 +65,8 @@
         }
     }
 </script>
+<style scoped>
+.page-link:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+</style>

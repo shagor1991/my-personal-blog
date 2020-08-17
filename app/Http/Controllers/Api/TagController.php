@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TagCollection;
 use App\Tag;
 use Illuminate\Http\Request;
 
@@ -15,10 +16,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags= Tag::latest()->paginate(10);
-        return response()->json([
-            'tags'  => $tags
-        ], 200);
+
+        $tags = new TagCollection(Tag::paginate(10));
+        return $tags;
     }
 
     /**
