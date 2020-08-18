@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Form Validation</h1>
+                    <!-- <h1>Form Validation</h1> -->
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                         <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">All Tags</h3>
+                            <h3 class="card-title">Tags</h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-info" @click="create">
                                     Add New
@@ -72,7 +72,7 @@
                                                 <i class="fas fa-eye"></i>
                                             </button>
 
-                                            <button class="btn btn-primary">
+                                            <button class="btn btn-primary" @click="edit(tag)">
                                                 <i class="fas fa-edit"></i>
                                             </button>
 
@@ -92,15 +92,7 @@
                             </div>
                         </div>
                         <!-- /.card-body -->
-                        <!-- <div class="card-footer clearfix">
-                            <ul class="pagination pagination-sm m-0 float-right">
-                            <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                            </ul>
-                        </div> -->
+                        
                         </div>
                         <!-- /.card -->
 
@@ -118,12 +110,12 @@
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="TagModalLongTitle">Modal title</h5>
+                <h5 class="modal-title" id="TagModalLongTitle">{{ editMode ? "Edit" : "Add"}} Tag</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 </div>
-                <form role="form" @submit.prevent="store()" @keydown="form.onKeydown($event)">
+                <form role="form" @submit.prevent="editMode ? update(): store()" @keydown="form.onKeydown($event)">
                     <div class="modal-body">                
                         <div class="card-body">
 
@@ -159,13 +151,24 @@
                 tags: [],
                 queryField:'name',
                 query: '',
+                editMode: false,
                 pagination: {
                     current_page: 1,
                     from: 1
                 },
                 form: new Form({
+                    id: '',
                     name: ''
                 })
+            }
+        },
+        watch: {
+            query: function(query_new, query_old){
+                if(query_new === ''){
+                    this.getData();
+                }else{
+                    this.searchData();
+                }
             }
         },
         mounted() {
@@ -186,27 +189,95 @@
                     this.$Progress.fail()
                 })
             },
+            searchData(){
+                this.$Progress.start()
+                axios.get('/api/search/tags/'+ this.queryField+ '/'+ this.query)
+                .then(response=>{
+                    console.log(response)
+                    this.tags= response.data.data
+                    this.pagination = response.data.meta;
+                    this.$Progress.finish()
+                })
+                .catch(error=> {
+                    console.log(error)
+                    this.$Progress.fail()
+                })
+            },
             create(){
+                this.editMode= false
                 this.form.reset()
-                this.form.clear()
-                this.$snotify.success("tag created successfully!", "Success"); 
+                this.form.clear() 
                 $('#TagModalLong').modal('show')
             },
             store(){
+                this.$Progress.start()
                 this.form.busy= true
                 this.form.post('/api/tag')
                 .then(response=>{
                     this.getData()
                     $('#TagModalLong').modal('hide')
-                    this.$snotify.success("tag created successfully!", "Success")
+                    
+                    if(this.form.successful){
+                        this.$Progress.finish()
+                        this.$snotify.success("tag created successfully!", "Success")
+                    }else{
+                        this.$Progress.fail();
+                        this.$snotify.error(
+                        "Something went wrong try again later.",
+                        "Error"
+                        );
+                    }
                 })
                 .catch(error=>{
                     console.log(error)
+                    $('#TagModalLong').modal('hide')
+                })
+            },
+            edit(tag){
+                this.editMode= true
+                this.form.reset()
+                this.form.clear()
+                this.form.fill(tag)
+                $('#TagModalLong').modal('show');
+            },
+            update(){
+                this.$Progress.start()
+                this.form.busy= true
+                this.form.put('/api/tag/'+ this.form.id)
+                .then(response=>{
+                    this.getData()
+                    $('#TagModalLong').modal('hide')
+                    
+                    if(this.form.successful){
+                        this.$Progress.finish()
+                        this.$snotify.success("tag updated successfully!", "Success")
+                    }else{
+                        this.$Progress.fail();
+                        this.$snotify.error(
+                        "Something went wrong try again later.",
+                        "Error"
+                        );
+                    }
+                })
+                .catch(error=>{
+                    console.log(error)
+                    // $('#TagModalLong').modal('hide')
                 })
             },
             destroy(tag){
                 // console.log(tag)
-                this.$snotify.success("Are you sure to delete this?");
+                this.$snotify.confirm('Are you sure to delete this?', 'Danger!', {
+                timeout: 5000,
+                showProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: true,
+                buttons: [
+                    {text: 'Yes', action: () => , bold: true},
+                    {text: 'No', action: () => console.log('Clicked: No')},
+                    {text: 'Later', action: (toast) => {console.log('Clicked: Later'); vm.$snotify.remove(toast.id); } },
+                    {text: 'Close', action: (toast) => {console.log('Clicked: No'); vm.$snotify.remove(toast.id); }, bold: true},
+                ]
+                });
             }
         }
     }

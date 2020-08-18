@@ -17,7 +17,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = new TagCollection(Tag::paginate(10));
+        $tags = new TagCollection(Tag::latest()->paginate(10));
         return $tags;
     }
 
@@ -49,6 +49,18 @@ class TagController extends Controller
     public function show($id)
     {
         return new TagResource(Tag::find($id));
+    }
+
+
+    /**
+     * Display the search result listing.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function search($field,$query)
+    {
+        return new TagCollection(Tag::Where($field, 'LIKE', "%$query%")->latest()->paginate(10));
     }
 
     /**

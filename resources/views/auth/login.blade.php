@@ -22,7 +22,7 @@
   <div class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        {{-- <a href="#"><b>Shagor's</b> Blog</a> --}}
+        <a href="#"><b>Admin</b> Login</a>
       </div>
       <!-- /.login-logo -->
       <div class="card">

@@ -2125,225 +2125,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TagComponent.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      tags: [],
-      queryField: 'name',
-      query: '',
-      pagination: {
-        current_page: 1,
-        from: 1
-      },
-      form: new Form({
-        name: ''
-      })
-    };
-  },
-  mounted: function mounted() {
-    this.getData();
-  },
-  methods: {
-    getData: function getData() {
-      var _this = this;
-
-      this.$Progress.start();
-      axios.get('/api/tag?page=' + this.pagination.current_page).then(function (response) {
-        console.log(response);
-        _this.tags = response.data.data;
-        _this.pagination = response.data.meta;
-
-        _this.$Progress.finish();
-      })["catch"](function (error) {
-        console.log(error);
-
-        _this.$Progress.fail();
-      });
-    },
-    create: function create() {
-      this.form.reset();
-      this.form.clear();
-      this.$snotify.success("tag created successfully!", "Success");
-      $('#TagModalLong').modal('show');
-    },
-    store: function store() {
-      var _this2 = this;
-
-      this.form.busy = true;
-      this.form.post('/api/tag').then(function (response) {
-        _this2.getData();
-
-        $('#TagModalLong').modal('hide');
-
-        _this2.$snotify.success("tag created successfully!", "Success");
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    destroy: function destroy(tag) {
-      // console.log(tag)
-      this.$snotify.success("Are you sure to delete this?");
-    }
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\resources\\js\\components\\TagComponent.vue: Unexpected token (275:44)\n\n\u001b[0m \u001b[90m 273 | \u001b[39m            pauseOnHover\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 274 | \u001b[39m            buttons\u001b[33m:\u001b[39m [\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 275 | \u001b[39m                {text\u001b[33m:\u001b[39m \u001b[32m'Yes'\u001b[39m\u001b[33m,\u001b[39m action\u001b[33m:\u001b[39m () \u001b[33m=>\u001b[39m \u001b[33m,\u001b[39m bold\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m}\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 276 | \u001b[39m                {text\u001b[33m:\u001b[39m \u001b[32m'No'\u001b[39m\u001b[33m,\u001b[39m action\u001b[33m:\u001b[39m () \u001b[33m=>\u001b[39m console\u001b[33m.\u001b[39mlog(\u001b[32m'Clicked: No'\u001b[39m)}\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 277 | \u001b[39m                {text\u001b[33m:\u001b[39m \u001b[32m'Later'\u001b[39m\u001b[33m,\u001b[39m action\u001b[33m:\u001b[39m (toast) \u001b[33m=>\u001b[39m {console\u001b[33m.\u001b[39mlog(\u001b[32m'Clicked: Later'\u001b[39m)\u001b[33m;\u001b[39m vm\u001b[33m.\u001b[39m$snotify\u001b[33m.\u001b[39mremove(toast\u001b[33m.\u001b[39mid)\u001b[33m;\u001b[39m } }\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 278 | \u001b[39m                {text\u001b[33m:\u001b[39m \u001b[32m'Close'\u001b[39m\u001b[33m,\u001b[39m action\u001b[33m:\u001b[39m (toast) \u001b[33m=>\u001b[39m {console\u001b[33m.\u001b[39mlog(\u001b[32m'Clicked: No'\u001b[39m)\u001b[33m;\u001b[39m vm\u001b[33m.\u001b[39m$snotify\u001b[33m.\u001b[39mremove(toast\u001b[33m.\u001b[39mid)\u001b[33m;\u001b[39m }\u001b[33m,\u001b[39m bold\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m}\u001b[33m,\u001b[39m\u001b[0m\n    at Parser._raise (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:757:17)\n    at Parser.raiseWithData (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:750:17)\n    at Parser.raise (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:744:17)\n    at Parser.unexpected (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:8834:16)\n    at Parser.parseExprAtom (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:10176:20)\n    at Parser.parseExprSubscripts (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9688:23)\n    at Parser.parseMaybeUnary (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9668:21)\n    at Parser.parseExprOps (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9538:23)\n    at Parser.parseMaybeConditional (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9511:23)\n    at Parser.parseMaybeAssign (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9466:21)\n    at Parser.parseFunctionBody (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:10751:24)\n    at Parser.parseArrowExpression (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:10727:10)\n    at Parser.parseParenAndDistinguishExpression (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:10341:12)\n    at Parser.parseExprAtom (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:10042:21)\n    at Parser.parseExprSubscripts (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9688:23)\n    at Parser.parseMaybeUnary (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9668:21)\n    at Parser.parseExprOps (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9538:23)\n    at Parser.parseMaybeConditional (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9511:23)\n    at Parser.parseMaybeAssign (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9466:21)\n    at Parser.parseObjectProperty (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:10636:101)\n    at Parser.parseObjPropValue (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:10661:101)\n    at Parser.parseObjectMember (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:10585:10)\n    at Parser.parseObj (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:10494:25)\n    at Parser.parseExprAtom (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:10090:28)\n    at Parser.parseExprSubscripts (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9688:23)\n    at Parser.parseMaybeUnary (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9668:21)\n    at Parser.parseExprOps (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9538:23)\n    at Parser.parseMaybeConditional (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9511:23)\n    at Parser.parseMaybeAssign (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9466:21)\n    at Parser.parseExprListItem (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:10846:18)\n    at Parser.parseExprList (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:10816:22)\n    at Parser.parseExprAtom (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:10064:32)\n    at Parser.parseExprSubscripts (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9688:23)\n    at Parser.parseMaybeUnary (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9668:21)\n    at Parser.parseExprOps (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9538:23)\n    at Parser.parseMaybeConditional (D:\\xampp\\htdocs\\laravel\\vue\\shagor-personal-blog\\node_modules\\@babel\\parser\\lib\\index.js:9511:23)");
 
 /***/ }),
 
@@ -39976,7 +39760,7 @@ var render = function() {
             _c("div", { staticClass: "col-md-12" }, [
               _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-header" }, [
-                  _c("h3", { staticClass: "card-title" }, [_vm._v("All Tags")]),
+                  _c("h3", { staticClass: "card-title" }, [_vm._v("Tags")]),
                   _vm._v(" "),
                   _c("div", { staticClass: "card-tools" }, [
                     _c(
@@ -40104,7 +39888,18 @@ var render = function() {
                                 _c("td", [
                                   _vm._m(2, true),
                                   _vm._v(" "),
-                                  _vm._m(3, true),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-primary",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.edit(tag)
+                                        }
+                                      }
+                                    },
+                                    [_c("i", { staticClass: "fas fa-edit" })]
+                                  ),
                                   _vm._v(" "),
                                   _c(
                                     "button",
@@ -40167,7 +39962,18 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(4),
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h5",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "TagModalLongTitle" }
+                    },
+                    [_vm._v(_vm._s(_vm.editMode ? "Edit" : "Add") + " Tag")]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ]),
                 _vm._v(" "),
                 _c(
                   "form",
@@ -40176,7 +39982,7 @@ var render = function() {
                     on: {
                       submit: function($event) {
                         $event.preventDefault()
-                        return _vm.store()
+                        _vm.editMode ? _vm.update() : _vm.store()
                       },
                       keydown: function($event) {
                         return _vm.form.onKeydown($event)
@@ -40285,9 +40091,7 @@ var staticRenderFns = [
     return _c("section", { staticClass: "content-header" }, [
       _c("div", { staticClass: "container-fluid" }, [
         _c("div", { staticClass: "row mb-2" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("h1", [_vm._v("Form Validation")])
-          ]),
+          _c("div", { staticClass: "col-sm-6" }),
           _vm._v(" "),
           _c("div", { staticClass: "col-sm-6" }, [
             _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
@@ -40332,34 +40136,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-primary" }, [
-      _c("i", { staticClass: "fas fa-edit" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "TagModalLongTitle" } },
-        [_vm._v("Modal title")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
