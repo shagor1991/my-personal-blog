@@ -87,7 +87,7 @@
                                 <pagination
                                 :pagination='pagination'
                                 :offset="5"
-                                @paginate="getData()"
+                                @paginate="query==='' ? getData() : searchData()"
                                 > </pagination>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
             },
             searchData(){
                 this.$Progress.start()
-                axios.get('/api/search/tags/'+ this.queryField+ '/'+ this.query)
+                axios.get('/api/search/tags/'+ this.queryField+ '/'+ this.query+ "?page="+ this.pagination.current_page)
                 .then(response=>{
                     console.log(response)
                     this.tags= response.data.data
@@ -266,16 +266,39 @@
             },
             destroy(tag){
                 // console.log(tag)
+                this.$snotify.clear();
+
                 this.$snotify.confirm('Are you sure to delete this?', 'Danger!', {
-                timeout: 5000,
                 showProgressBar: true,
                 closeOnClick: false,
                 pauseOnHover: true,
                 buttons: [
-                    {text: 'Yes', action: () => , bold: true},
-                    {text: 'No', action: () => console.log('Clicked: No')},
-                    {text: 'Later', action: (toast) => {console.log('Clicked: Later'); vm.$snotify.remove(toast.id); } },
-                    {text: 'Close', action: (toast) => {console.log('Clicked: No'); vm.$snotify.remove(toast.id); }, bold: true},
+                    {
+                        text: 'Yes', 
+                        action: (toast) => {
+                            this.$snotify.remove(toast.id);
+                            this.$Progress.start();
+                            axios.delete('/api/tag/'+tag.id)
+                            .then(response=> {
+                                this.getData()
+                                this.$Progress.finish()
+                                this.$snotify.success("Deleted Successfully","Success")
+                            })
+                            .catch(error=> {
+                                this.$Progress.fail()
+
+                            })
+
+                            },
+                        bold: true
+                    },
+                    {
+                        text: 'No',
+                        action: (toast) => {
+                            this.$snotify.remove(toast.id); 
+                        },
+                        bold: true
+                    },
                 ]
                 });
             }

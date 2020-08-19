@@ -60,6 +60,13 @@
               <p>Tag</p>
             </router-link>
           </li>
+
+          <li class="nav-item">            
+            <router-link to="/category" class="nav-link">
+              <i class="fas fa-tags"></i>
+              <p>Category</p>
+            </router-link>
+          </li>
           
         </ul>
       </nav>

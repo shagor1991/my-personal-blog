@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
+use App\Http\Resources\CategoryResource;
 
 class CategoryController extends Controller
 {
@@ -15,10 +16,21 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories= Category::paginate(10);
-        return response()->json([
-            'categories' => $categories
-        ], 200);
+        $categories= Category::latest()->paginate(10);
+        return CategoryResource::collection($categories);
+
+    }
+
+    /**
+     * Display a search listing.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search($field, $query)
+    {
+        $categories= Category::where($field, 'LIKE', "%$query%")->latest()->paginate(10);
+        return CategoryResource::collection($categories);
+
     }
 
 
@@ -40,9 +52,7 @@ class CategoryController extends Controller
         $category->name         = $request->name;
         $category->save();
 
-        return response()->json([
-            'category' => $category
-        ], 200);
+        return new CategoryResource($category);
     }
 
     /**
@@ -54,9 +64,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category= Category::find($id);
-        return response()->json([
-            'category' => $category
-        ],200);
+        return new CategoryResource($category);
     }
 
 
@@ -79,9 +87,7 @@ class CategoryController extends Controller
         $category->name         = $request->name;
         $category->save();
 
-        return response()->json([
-            'category' => $category
-        ], 200);
+        return new CategoryResource($category);
     }
 
     /**
@@ -95,8 +101,6 @@ class CategoryController extends Controller
         $category= Category::find($id);
         $category->delete();
 
-        return response()->json([
-            'category'  => $category
-        ],200);
+        return new CategoryResource($category);
     }
 }
