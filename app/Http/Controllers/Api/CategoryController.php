@@ -33,6 +33,16 @@ class CategoryController extends Controller
 
     }
 
+    /**
+     * Display a search listing.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function parent_category()
+    {
+        $categories= Category::where('parent_id',0)->latest()->get();
+        return CategoryResource::collection($categories);
+    }
 
     /**
      * Store a newly created resource in storage.

@@ -39,7 +39,9 @@ const VueProgressBarOptions = {
   
 Vue.use(VueProgressBar, VueProgressBarOptions)
 
-
+// register globally
+import Multiselect from 'vue-multiselect'
+Vue.component('multiselect', Multiselect)
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('admin-home', require('./components/AdminHome.vue').default);
@@ -53,4 +55,5 @@ Vue.component(AlertError.name, AlertError)
 const app = new Vue({
     router,
     el: '#app',
+    // $('.select2').select2(),
 });

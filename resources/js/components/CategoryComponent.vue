@@ -116,33 +116,25 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form>
+            <form @submit.prevent="store()">
                 <div class="modal-body"> 
                 
                 <div class="form-group">
-                  <label>Minimal</label>
-                  <select class="form-control select2" style="width: 100%;">
-                    <option selected="selected">Alabama</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
-                  </select>
+                  <label>Parent Category</label>
+                  <multiselect v-model="form.parent_id" :options="parent_options" @select="updateParent()" track-by="id" label="name"></multiselect>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <label for="category_name">Category Name</label>
+                    <input type="text" class="form-control" id="category_name" v-model="form.name" placeholder="Enter email" :class="{ 'is-invalid': form.errors.has('username') }">
+                    <has-error :form="form" field="name"></has-error>
                 </div>
                 
                 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
             </div>
@@ -164,13 +156,20 @@ export default {
                 current_page: 1,
                 from: 1
             },
+            form: new Form({
+                'id': '',
+                'parent_id': '',
+                'name': '',
+            }),
             query: '',
-            queryField: 'name'
+            queryField: 'name',
+            parent_value: null,
+            parent_options: []
         }
     },
-    mounted(){
-        
+    mounted(){        
         this.getCategories()
+        this.getParentCategory()
     },
     watch:{
         query: function(queryNew, queryOld){
@@ -186,7 +185,7 @@ export default {
             this.$Progress.start()
             axios.get('/api/category?page='+ this.pagination.current_page)
             .then(response=> {
-                console.log(response)
+                // console.log(response)
                 this.$Progress.finish()
                 this.categories= response.data.data
                 this.pagination= response.data.meta
@@ -208,13 +207,29 @@ export default {
                 this.$Progress.fail()
             })
         },
+        getParentCategory(){
+            axios.get('/api/parentcategory')
+            .then(response=> {
+                console.log(response.data.data);
+                this.parent_options= response.data.data
+            })
+            .catch(error=> {
+                this.$Progress.fail()
+            })
+        },
         create(){
             $('#CategoryModalLong').modal('show')
+        },
+        store(){
+            console.log(this.form);
+        },
+        updateParent(){
+            console.log(this.form.parent_id.id)
         }
     }
 }
 </script>
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
 
 </style>>

@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource('/category', 'Api\CategoryController');
 Route::get('search/category/{field}/{query}','Api\CategoryController@search');
+Route::get('/parentcategory', 'Api\CategoryController@parent_category');
 Route::apiResource('/post', 'Api\PostController');
 Route::apiResource('/tag', 'Api\TagController');
 Route::get('search/tags/{field}/{query}','Api\TagController@search');
