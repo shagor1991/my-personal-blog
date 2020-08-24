@@ -2167,13 +2167,37 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     create: function create() {
+      this.form.reset();
+      this.form.clear();
       $('#CategoryModalLong').modal('show');
     },
     store: function store() {
-      console.log(this.form);
+      var _this4 = this;
+
+      this.$Progress.start();
+      this.form.busy = true;
+      this.form.post('/api/category').then(function (response) {
+        _this4.getCategories();
+
+        $('#CategoryModalLong').modal('hide');
+
+        if (_this4.form.successful) {
+          _this4.$Progress.finish();
+
+          _this4.$snotify.success("Category created successfully!", "Success");
+        } else {
+          _this4.$Progress.fail();
+
+          _this4.$snotify.error("Something went wrong try again later.", "Error");
+        }
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this4.$Progress.fail();
+      });
     },
     updateParent: function updateParent() {
-      console.log(this.form.parent_id.id);
+      this.form.parent_id = this.parent_value.id;
     }
   }
 });
@@ -2608,7 +2632,9 @@ __webpack_require__.r(__webpack_exports__);
         }
       })["catch"](function (error) {
         console.log(error);
-        $('#TagModalLong').modal('hide');
+
+        _this3.$Progress.fail(); // $('#TagModalLong').modal('hide')
+
       });
     },
     edit: function edit(tag) {
@@ -40213,80 +40239,91 @@ var render = function() {
                     }
                   },
                   [
-                    _c("div", { staticClass: "modal-body" }, [
-                      _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c("label", [_vm._v("Parent Category")]),
-                          _vm._v(" "),
-                          _c("multiselect", {
-                            attrs: {
-                              options: _vm.parent_options,
-                              "track-by": "id",
-                              label: "name"
-                            },
-                            on: {
-                              select: function($event) {
-                                return _vm.updateParent()
-                              }
-                            },
-                            model: {
-                              value: _vm.form.parent_id,
-                              callback: function($$v) {
-                                _vm.$set(_vm.form, "parent_id", $$v)
+                    _c(
+                      "div",
+                      { staticClass: "modal-body" },
+                      [
+                        _c("alert-error", { attrs: { form: _vm.form } }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", [_vm._v("Parent Category")]),
+                            _vm._v(" "),
+                            _c("multiselect", {
+                              attrs: {
+                                options: _vm.parent_options,
+                                "track-by": "id",
+                                label: "name"
                               },
-                              expression: "form.parent_id"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c("label", { attrs: { for: "category_name" } }, [
-                            _vm._v("Category Name")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.name,
-                                expression: "form.name"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: {
-                              "is-invalid": _vm.form.errors.has("username")
-                            },
-                            attrs: {
-                              type: "text",
-                              id: "category_name",
-                              placeholder: "Enter email"
-                            },
-                            domProps: { value: _vm.form.name },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                              on: {
+                                input: function($event) {
+                                  return _vm.updateParent()
                                 }
-                                _vm.$set(_vm.form, "name", $event.target.value)
+                              },
+                              model: {
+                                value: _vm.parent_value,
+                                callback: function($$v) {
+                                  _vm.parent_value = $$v
+                                },
+                                expression: "parent_value"
                               }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "name" }
-                          })
-                        ],
-                        1
-                      )
-                    ]),
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", { attrs: { for: "category_name" } }, [
+                              _vm._v("Category Name")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.name,
+                                  expression: "form.name"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("name")
+                              },
+                              attrs: {
+                                type: "text",
+                                id: "category_name",
+                                placeholder: "Enter email"
+                              },
+                              domProps: { value: _vm.form.name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "name",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "name" }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _vm._m(4)
                   ]

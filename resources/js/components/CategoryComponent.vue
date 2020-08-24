@@ -118,15 +118,15 @@
             </div>
             <form @submit.prevent="store()">
                 <div class="modal-body"> 
-                
+                <alert-error :form="form"></alert-error>
                 <div class="form-group">
                   <label>Parent Category</label>
-                  <multiselect v-model="form.parent_id" :options="parent_options" @select="updateParent()" track-by="id" label="name"></multiselect>
+                  <multiselect v-model="parent_value" :options="parent_options" @input="updateParent()" track-by="id" label="name"></multiselect>
                 </div>
 
                 <div class="form-group">
                     <label for="category_name">Category Name</label>
-                    <input type="text" class="form-control" id="category_name" v-model="form.name" placeholder="Enter email" :class="{ 'is-invalid': form.errors.has('username') }">
+                    <input type="text" class="form-control" id="category_name" v-model="form.name" placeholder="Enter email" :class="{ 'is-invalid': form.errors.has('name') }">
                     <has-error :form="form" field="name"></has-error>
                 </div>
                 
@@ -218,13 +218,36 @@ export default {
             })
         },
         create(){
+            this.form.reset()
+            this.form.clear()
             $('#CategoryModalLong').modal('show')
         },
         store(){
-            console.log(this.form);
+                this.$Progress.start()
+                this.form.busy= true
+                this.form.post('/api/category')
+                .then(response=>{
+                    this.getCategories()
+                    $('#CategoryModalLong').modal('hide')
+
+                    if(this.form.successful){
+                        this.$Progress.finish()
+                        this.$snotify.success("Category created successfully!", "Success")
+                    }else{
+                        this.$Progress.fail();
+                        this.$snotify.error(
+                        "Something went wrong try again later.",
+                        "Error"
+                        );
+                    }
+                })
+                .catch(error=>{
+                    console.log(error)
+                    this.$Progress.fail();
+                })
         },
         updateParent(){
-            console.log(this.form.parent_id.id)
+            this.form.parent_id= this.parent_value.id
         }
     }
 }

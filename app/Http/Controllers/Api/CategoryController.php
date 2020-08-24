@@ -53,12 +53,14 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'parent_id' => 'required',
             'name'      => 'required'
         ]);
 
         $category= new Category;
-        $category->parent_id    = $request->parent_id;
+
+        if($request->parent_id !=''){
+            $category->parent_id    = $request->parent_id;
+        }        
         $category->name         = $request->name;
         $category->save();
 

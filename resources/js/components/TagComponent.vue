@@ -230,7 +230,8 @@
                 })
                 .catch(error=>{
                     console.log(error)
-                    $('#TagModalLong').modal('hide')
+                    this.$Progress.fail();
+                    // $('#TagModalLong').modal('hide')
                 })
             },
             edit(tag){
